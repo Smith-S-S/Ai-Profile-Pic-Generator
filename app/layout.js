@@ -1,6 +1,7 @@
 import { VT323 } from "next/font/google";
 import "./globals.css";
 import Provider from "./provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 // here is the font i want to use in my project
 
@@ -16,6 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={press_font.className}
@@ -24,5 +26,6 @@ export default function RootLayout({ children }) {
         
       </body>
     </html>
+    </ClerkProvider>
   );
 }

@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HeadingDescription from './HeadingDescription'
 import Lookup from '@/app/_data/Lookup'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-function PricingModel() {
+import { SignInButton } from '@clerk/nextjs'
+import { useUser } from '@clerk/nextjs';
+import Link from 'next/link'
+
+
+function PricingModel({formData}) {
+
+  const {user} = useUser();
+
+  useEffect(() => {
+    if (formData?. title&& typeof window !== 'undefined') 
+      {
+        localStorage.setItem("formData", JSON.stringify(formData));
+      }
+  }, [formData]);
+
   return (
     <div className='my-10'>
         <HeadingDescription
@@ -13,7 +28,7 @@ function PricingModel() {
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-5'>
             {Lookup.pricingOpttions.map((pricing,index)=>(
                 <div key={index}
-                className='p-5 hover:border-2 rounded-xl cursor-pointer flex flex-col items-center justify-center text-center border'>
+                className='p-5 hover:border-2 rounded-xl  flex flex-col items-center justify-center text-center border'>
                     <Image src={pricing.icon} alt ={pricing.tittle} width={60} height={60}></Image>
 
                     <h3 className='text-2xl font-bold mt-3'>{pricing.tittle}</h3>
@@ -22,7 +37,17 @@ function PricingModel() {
                             <p key={index} className='text-lg ext-gray-600 mt-2 text-left'>{feature}</p>
                         ))}                      
                     </div>
-                  <Button className="mt-5">{pricing.button}</Button> 
+
+                    {
+                    user ? 
+                    <Link href={"/generate-logo?type="+pricing.tittle}>
+                  <Button className="mt-5 cursor-pointer">{pricing.button}</Button> 
+                  </Link>
+                  : <SignInButton mode="modal" forceRedirectUrl={"/generate-logo?type="+pricing.tittle}> 
+                    <Button className="mt-5">{pricing.button}</Button> 
+                    </SignInButton>
+                    }     
+
                 </div>
 
             ))}
