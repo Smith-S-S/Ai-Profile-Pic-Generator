@@ -25,7 +25,20 @@ function CreateLogo() {
     console.log("formData", formData);
 
   return (
-    <div className='mt-28 p-10 border rounded-xl 2xl:mx-72'>
+    <div className='mt-28 p-10 border border-electric-blue/30 rounded-xl 2xl:mx-72 bg-card shadow-lg'>
+      {/* Progress Indicator */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-bold text-electric-blue">Create Your Logo</h2>
+          <span className="text-sm text-muted-foreground">Step {step} of 6</span>
+        </div>
+        <div className="w-full bg-muted rounded-full h-2">
+          <div 
+            className="bg-gradient-electric h-2 rounded-full transition-all duration-300" 
+            style={{ width: `${(step / 6) * 100}%` }}
+          ></div>
+        </div>
+      </div>
 
         {step ==1?
         <LogoTitle onHandleInputChange={(v)=>onHandleInputChange("title", v)} formData = {formData}/>:
@@ -48,11 +61,13 @@ function CreateLogo() {
            {step!=1 && 
            <Button 
            variant="outline" 
+           className="border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-white"
            onClick ={()=>setStep(step-1)}> 
            <ArrowLeft/> Previous 
            </Button>}
 
             <Button 
+            className="bg-gradient-electric hover:glow-electric-blue text-white font-semibold"
             onClick ={()=>setStep(step+1)}> 
             <ArrowRight/> Continue 
             </Button>

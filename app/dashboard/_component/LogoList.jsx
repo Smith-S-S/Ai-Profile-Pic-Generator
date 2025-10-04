@@ -33,19 +33,20 @@ function LogoList() {
 
   return (
     <div className="mt-10">
+      <h3 className="text-2xl font-bold text-dark-navy mb-6">Your Generated Logos</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {logoList.length > 0 ? (
           logoList.map((logo, index) => (
-            <div key={index} className="border p-4 rounded-lg mb-4 hover:scale-105 transition-transform duration-200 cursor-pointer"
+            <div key={index} className="border border-electric-blue/30 p-4 rounded-lg mb-4 hover:scale-105 transition-all duration-200 cursor-pointer bg-card hover:glow-subtle hover:border-electric-blue"
               onClick={() => ViewLogo(logo?.image)}>
-              <Image src={logo?.image} width={100} height={100} alt="logo" />
-              <h3 className="font-bold text-lg mt-2">{logo?.title}</h3>
-              <p className="text-gray-600">{logo?.description}</p>
+              <Image src={logo?.image} width={100} height={100} alt="logo" className="rounded-lg" />
+              <h3 className="font-bold text-lg mt-2 text-dark-navy">{logo?.title}</h3>
+              <p className="text-muted-foreground">{logo?.description}</p>
             </div>
           ))
         ) : (
           [1, 2, 3, 4, 5, 6].map((_, index) => (
-            <div key={index} className="border p-4 rounded-lg mb-4 animate-pulse h-[140px] w-[120px] bg-gray-200" />
+            <div key={index} className="border border-electric-blue/20 p-4 rounded-lg mb-4 animate-pulse h-[140px] w-[120px] bg-gradient-to-br from-electric-blue/10 to-violet/10" />
           ))
         )}
       </div>

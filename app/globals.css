@@ -45,71 +45,82 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  
+  /* New Color Palette - Light Theme */
+  --background: oklch(1 0 0); /* White */
+  --foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --card: oklch(0.98 0.01 250); /* Light Navy */
+  --card-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --popover: oklch(0.98 0.01 250); /* Light Navy */
+  --popover-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --primary: oklch(0.65 0.25 200); /* Electric Blue */
+  --primary-foreground: oklch(1 0 0); /* White */
+  --secondary: oklch(0.75 0.2 190); /* Neon Cyan */
+  --secondary-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --muted: oklch(0.95 0.01 250); /* Light Navy */
+  --muted-foreground: oklch(0.4 0.02 250); /* Medium Navy */
+  --accent: oklch(0.6 0.2 280); /* Violet */
+  --accent-foreground: oklch(1 0 0); /* White */
+  --destructive: oklch(0.65 0.2 30); /* Orange Spark */
+  --border: oklch(0.9 0.01 250); /* Light Navy Border */
+  --input: oklch(0.95 0.01 250); /* Light Navy Input */
+  --ring: oklch(0.65 0.25 200); /* Electric Blue Ring */
+  
+  /* Chart Colors using new palette */
+  --chart-1: oklch(0.65 0.25 200); /* Electric Blue */
+  --chart-2: oklch(0.75 0.2 190); /* Neon Cyan */
+  --chart-3: oklch(0.6 0.2 280); /* Violet */
+  --chart-4: oklch(0.65 0.2 30); /* Orange Spark */
+  --chart-5: oklch(0.15 0.02 250); /* Dark Navy */
+  
+  /* Sidebar Colors */
+  --sidebar: oklch(0.98 0.01 250); /* Light Navy */
+  --sidebar-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --sidebar-primary: oklch(0.65 0.25 200); /* Electric Blue */
+  --sidebar-primary-foreground: oklch(1 0 0); /* White */
+  --sidebar-accent: oklch(0.95 0.01 250); /* Light Navy */
+  --sidebar-accent-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --sidebar-border: oklch(0.9 0.01 250); /* Light Navy Border */
+  --sidebar-ring: oklch(0.65 0.25 200); /* Electric Blue Ring */
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* New Color Palette - Dark Theme */
+  --background: oklch(0.15 0.02 250); /* Dark Navy */
+  --foreground: oklch(1 0 0); /* White */
+  --card: oklch(0.2 0.02 250); /* Darker Navy */
+  --card-foreground: oklch(1 0 0); /* White */
+  --popover: oklch(0.2 0.02 250); /* Darker Navy */
+  --popover-foreground: oklch(1 0 0); /* White */
+  --primary: oklch(0.7 0.25 200); /* Brighter Electric Blue */
+  --primary-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --secondary: oklch(0.8 0.2 190); /* Brighter Neon Cyan */
+  --secondary-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --muted: oklch(0.25 0.02 250); /* Medium Navy */
+  --muted-foreground: oklch(0.7 0.01 250); /* Light Navy */
+  --accent: oklch(0.65 0.2 280); /* Brighter Violet */
+  --accent-foreground: oklch(1 0 0); /* White */
+  --destructive: oklch(0.7 0.2 30); /* Brighter Orange Spark */
+  --border: oklch(0.3 0.02 250); /* Navy Border */
+  --input: oklch(0.25 0.02 250); /* Navy Input */
+  --ring: oklch(0.7 0.25 200); /* Electric Blue Ring */
+  
+  /* Chart Colors using new palette */
+  --chart-1: oklch(0.7 0.25 200); /* Electric Blue */
+  --chart-2: oklch(0.8 0.2 190); /* Neon Cyan */
+  --chart-3: oklch(0.65 0.2 280); /* Violet */
+  --chart-4: oklch(0.7 0.2 30); /* Orange Spark */
+  --chart-5: oklch(1 0 0); /* White */
+  
+  /* Sidebar Colors */
+  --sidebar: oklch(0.2 0.02 250); /* Darker Navy */
+  --sidebar-foreground: oklch(1 0 0); /* White */
+  --sidebar-primary: oklch(0.7 0.25 200); /* Electric Blue */
+  --sidebar-primary-foreground: oklch(0.15 0.02 250); /* Dark Navy */
+  --sidebar-accent: oklch(0.25 0.02 250); /* Medium Navy */
+  --sidebar-accent-foreground: oklch(1 0 0); /* White */
+  --sidebar-border: oklch(0.3 0.02 250); /* Navy Border */
+  --sidebar-ring: oklch(0.7 0.25 200); /* Electric Blue Ring */
 }
 
 @layer base {
@@ -118,5 +129,68 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Color Palette Classes */
+@layer utilities {
+  /* Primary Colors */
+  .text-electric-blue { color: #00B2FF; }
+  .bg-electric-blue { background-color: #00B2FF; }
+  .border-electric-blue { border-color: #00B2FF; }
+  
+  .text-neon-cyan { color: #00E5FF; }
+  .bg-neon-cyan { background-color: #00E5FF; }
+  .border-neon-cyan { border-color: #00E5FF; }
+  
+  .text-violet { color: #7A3FFF; }
+  .bg-violet { background-color: #7A3FFF; }
+  .border-violet { border-color: #7A3FFF; }
+  
+  .text-dark-navy { color: #0B1B3A; }
+  .bg-dark-navy { background-color: #0B1B3A; }
+  .border-dark-navy { border-color: #0B1B3A; }
+  
+  .text-orange-spark { color: #FF6B35; }
+  .bg-orange-spark { background-color: #FF6B35; }
+  .border-orange-spark { border-color: #FF6B35; }
+  
+  /* Neon Glow Effects */
+  .glow-electric-blue {
+    box-shadow: 0 0 20px rgba(0, 178, 255, 0.5), 0 0 40px rgba(0, 178, 255, 0.3);
+  }
+  
+  .glow-neon-cyan {
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), 0 0 40px rgba(0, 229, 255, 0.3);
+  }
+  
+  .glow-violet {
+    box-shadow: 0 0 20px rgba(122, 63, 255, 0.5), 0 0 40px rgba(122, 63, 255, 0.3);
+  }
+  
+  .glow-orange-spark {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5), 0 0 40px rgba(255, 107, 53, 0.3);
+  }
+  
+  /* Subtle glow for interactive elements */
+  .glow-subtle {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .glow-subtle:hover {
+    box-shadow: 0 0 15px rgba(0, 178, 255, 0.3);
+  }
+  
+  /* Gradient backgrounds */
+  .bg-gradient-electric {
+    background: linear-gradient(135deg, #00B2FF 0%, #00E5FF 100%);
+  }
+  
+  .bg-gradient-violet {
+    background: linear-gradient(135deg, #7A3FFF 0%, #00B2FF 100%);
+  }
+  
+  .bg-gradient-spark {
+    background: linear-gradient(135deg, #FF6B35 0%, #7A3FFF 100%);
   }
 }
