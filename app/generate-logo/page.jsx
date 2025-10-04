@@ -37,7 +37,7 @@ function GenerateLogo() {
 
 const GenerateAiLogo = async () => {
 
-  if (modelType!= "Free" && userDetails?.credit <= 0) {
+  if (modelType!= "Free" && userDetails?.credits <= 0) {
     // alert("You have no credits left. Please upgrade your plan.");
     toast.error("You have no credits left. Please upgrade your plan.");
     return;
@@ -63,7 +63,7 @@ const GenerateAiLogo = async () => {
         title: formData?.title,
         desc: formData?.desc,
         type: modelType,
-        userCredit: userDetails?.credit
+        userCredit: userDetails?.credits
       });
 
       console.log("AI logo model result", result?.data);

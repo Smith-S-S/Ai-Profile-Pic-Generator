@@ -1,4 +1,5 @@
-import { VT323 } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
+
 import "./globals.css";
 import Provider from "./provider";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -6,9 +7,11 @@ import { Toaster } from "sonner";
 
 // here is the font i want to use in my project
 
-const press_font = VT323({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: "400" // Specify the only available weight
+  weight: ["300", "400", "500", "600", "700"], // Available weights
+  display: "swap", // Recommended for better performance
+  variable: "--font-space-grotesk" // Optional: for Tailwind integration
 });
 
 export const metadata = {
@@ -21,7 +24,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
     <html lang="en">
       <body
-        className={press_font.className}
+        className={spaceGrotesk.className}
       >
         <Provider>{children}</Provider>
         <Toaster/>

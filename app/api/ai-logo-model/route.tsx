@@ -66,7 +66,7 @@ export async function POST(request: Request) {
 
     if (userCredit) {
       // Deduct user credits or perform any other logic
-      await updateDoc(doc(db, 'users', email), { credit: userCredit - 1 });
+      await updateDoc(doc(db, 'users', email), { credits: userCredit - 1 });
     }
 
     } else {

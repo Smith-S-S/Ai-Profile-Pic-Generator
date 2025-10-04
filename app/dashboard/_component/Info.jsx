@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 function Info() {
-  const { userDetail, setUserDetail } = useContext(UserDetailContext);
+  const { userDetails, setUserDetails } = useContext(UserDetailContext);
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -17,28 +17,28 @@ function Info() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (!userDetail?.email) return;
-      const docRef = doc(db, "users", userDetail.email);
+      if (!userDetails?.email) return;
+      const docRef = doc(db, "users", userDetails.email);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setUserDetail(docSnap.data()); // overwrite with Firestore data
+        setUserDetails(docSnap.data()); // overwrite with Firestore data
       }
     };
 
     fetchUser();
-  }, [userDetail?.email]);
+  }, [userDetails?.email]);
 
   return (
     <div>
       <h2 className="font-bold text-2xl">Dashboard</h2>
       <div className="flex justify-between items-center">
           <div>
-            <h2 className="font-bold text-2xl mt-2">Hello {hasMounted ? userDetail?.name || "Guest" : ""}</h2>
+            <h2 className="font-bold text-2xl mt-2">Hello {hasMounted ? userDetails?.name || "Guest" : ""}</h2>
           </div>
         <div className="flex items-center gap-2">
           <Image src={"/dollar.png"} alt="coin" width={40} height={40} />
-          <h2 className="font-bold text-3xl">{userDetail?.credits ?? 0} Credit Left</h2>
+          <h2 className="font-bold text-3xl">{userDetails?.credits ?? 0} Credit Left</h2>
         </div>
       </div>
         <div className="flex justify-between items-center mt-6">

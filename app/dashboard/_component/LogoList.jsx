@@ -8,15 +8,15 @@ import { View } from 'lucide-react';
 
 
 function LogoList() {
-  const { userDetail, setUserDetail } = useContext(UserDetailContext);
+  const { userDetails, setUserDetails } = useContext(UserDetailContext);
   const [logoList, setLogoList] = React.useState([]);
 
   useEffect(() => {
-    userDetail && GetUserLogos();
-  }, [userDetail]);
+    userDetails && GetUserLogos();
+  }, [userDetails]);
 
   const GetUserLogos = async() => {
-    const querySnapshot = await getDocs(collection(db, "users", userDetail?.email, "logos"));
+    const querySnapshot = await getDocs(collection(db, "users", userDetails?.email, "logos"));
     setLogoList([]);
     querySnapshot.forEach((doc) => {
       console.log(doc.data());

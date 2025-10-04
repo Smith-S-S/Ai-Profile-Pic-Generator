@@ -15,10 +15,12 @@ export async function POST(request) {
             return NextResponse.json(docsnap.data())
             }
         else{
-            // insert user data
+            // insert user data with default credits
+            const defaultCredits = parseInt(process.env.DEFAULT_USER_CREDITS) || 5;
             const data = {
                 email: userEmail,
-                name: userName
+                name: userName,
+                credits: defaultCredits
             }
             await setDoc(doc(db, "users", userEmail), {
                 ...data,
