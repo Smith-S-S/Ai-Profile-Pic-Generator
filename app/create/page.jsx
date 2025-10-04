@@ -41,9 +41,9 @@ function CreateLogo() {
       </div>
 
         {step ==1?
-        <LogoTitle onHandleInputChange={(v)=>onHandleInputChange("title", v)} formData = {formData}/>:
+        <LogoTitle onHandleInputChange={(v)=>onHandleInputChange("platform", v)} formData = {formData}/>:
         step ==2?
-        <LogoDes onHandleInputChange={(v)=>onHandleInputChange("desc", v)} formData = {formData}/>:
+        <LogoDes onHandleInputChange={(v)=>onHandleInputChange("keywords", v)} formData = {formData}/>:
         step ==3?
         <LogoColorPalete onHandleInputChange={(v)=>onHandleInputChange("pattet", v)} formData = {formData}/>:
         step ==4?
@@ -61,13 +61,13 @@ function CreateLogo() {
            {step!=1 && 
            <Button 
            variant="outline" 
-           className="border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-white"
+           className="border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-white cursor-pointer"
            onClick ={()=>setStep(step-1)}> 
            <ArrowLeft/> Previous 
            </Button>}
 
             <Button 
-            className="bg-gradient-electric hover:glow-electric-blue text-white font-semibold"
+            className="bg-gradient-electric hover:glow-electric-blue text-white font-semibold cursor-pointer"
             onClick ={()=>setStep(step+1)}> 
             <ArrowRight/> Continue 
             </Button>

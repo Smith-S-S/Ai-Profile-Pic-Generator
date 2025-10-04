@@ -26,8 +26,13 @@ function LogoDesigns({onHandleInputChange, formData}) {
               onHandleInputChange(design)
             }}
 
-            className={`p-1 hover:border-2 rounded-xl cursor-pointer ${selectedOption === design.title && 'border rounded-xl border-primary'}`}>
-              <Image src={design.image} alt={design.title} width={300} height={200} className='w-full rounded-lg  h-auto object-cover' />
+            className={`p-4 hover:border-2 rounded-xl cursor-pointer transition-all duration-200 bg-card border-2 ${
+              selectedOption === design.title 
+                ? 'border-electric-blue bg-electric-blue/10 glow-electric-blue' 
+                : 'border-gray-200 hover:border-electric-blue/50'
+            }`}>
+              <Image src={design.image} alt={design.title} width={300} height={200} className='w-full rounded-lg h-auto object-cover mb-3' />
+              <h3 className="font-bold text-center text-dark-navy">{design.title}</h3>
             </div>
           ))}
         </div>

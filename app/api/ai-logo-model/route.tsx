@@ -8,7 +8,7 @@ import { db } from '@/configs/FirebaseConfig';
 
 // Use native Buffer if needed (for base64 conversion)
 const genAI = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY!,
+  apiKey: process.env. _API_KEY!,
 });
 
 export async function POST(request: Request) {

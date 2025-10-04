@@ -10,7 +10,9 @@ function Header() {
 
     return (
         <div className="px-10 lg:px-32 xl:px-40 2xl:px-56 flex justify-between items-center shadow-sm border-b border-electric-blue/20 bg-background/95 backdrop-blur-sm">
-            <Image src={"/logo.png"} alt="Logo" width={180} height={100} />
+            <Link href="/" passHref>
+                <Image src={"/logo.png"} alt="Logo" width={180} height={100} className="cursor-pointer" />
+            </Link>
             <div className="flex gap-4 items-center">
                 {
                 user ? <Link href="/dashboard"><Button className="cursor-pointer bg-gradient-electric hover:glow-electric-blue text-white font-semibold">DashBoard</Button> </Link>:

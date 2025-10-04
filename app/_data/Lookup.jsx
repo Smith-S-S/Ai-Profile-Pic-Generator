@@ -5,11 +5,11 @@ export default{
    
     InputTittlePlaceHolder: "Type here...",
 
-    LogoTitle: "Avatar or Logo Title",
-    LogoTitleDesc: "Give your avatar or logo a name that reflects your project or personality.",
+    LogoTitle: "Choose Your Platform",
+    LogoTitleDesc: "Select the platform where you'll use your avatar. Each platform has different requirements and styles.",
   
-    LogoDescTitle: "Avatar or Logo Description",
-    LogoDesDes: "Describe your idea, identity, or theme. This helps the AI generate something unique to you.",
+    LogoDescTitle: "Your Developer Personality",
+    LogoDesDes: "Choose keywords that describe your coding style or personality. You can select from presets or type your own.",
   
     LogoIdeaTitle: "Idea or Concept",
     
@@ -21,6 +21,42 @@ export default{
   
     LogoPricingModelTittle: "Choose a Plan",
     LogoPricingModelDesc: "Select a pricing plan that fits your needs. Start for free or upgrade for more features.",
+
+    // Platform options for step 1
+    platforms: [
+        {
+            name: "GitHub",
+            icon: "🐙",
+            description: "Open source contributions",
+            color: "bg-gray-800"
+        },
+        {
+            name: "Discord",
+            icon: "💬",
+            description: "Gaming & community",
+            color: "bg-indigo-600"
+        },
+        {
+            name: "Slack",
+            icon: "💼",
+            description: "Professional workspace",
+            color: "bg-green-600"
+        },
+        {
+            name: "Reddit",
+            icon: "🤖",
+            description: "Community discussions",
+            color: "bg-orange-500"
+        }
+    ],
+
+    // Developer personality keywords
+    developerKeywords: [
+        "Bug Fixer", "Tense Dev", "Chill Coder", "Techie",
+        "Code Ninja", "Debug Master", "Night Owl", "Coffee Addict",
+        "Full Stack", "Frontend Hero", "Backend Wizard", "DevOps Guru",
+        "Open Source", "Startup Founder", "Freelancer", "Team Lead"
+    ],
   
     pricingOpttions: [
         {
