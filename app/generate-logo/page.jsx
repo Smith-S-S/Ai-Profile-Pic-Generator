@@ -4,6 +4,11 @@ import Prompt from '../_data/Prompt';
 import { UserDetailContext } from '../_context/UserDetailContext';
 import axios from 'axios';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { type } from 'os';
+import { toast } from 'sonner';
+
+
 function GenerateLogo() {
     const { userDetails, setUserDetails } = useContext(UserDetailContext);
     console.log("User details in GenerateLogo page:", userDetails);
@@ -11,6 +16,10 @@ function GenerateLogo() {
     const [loading, setLoading] = React.useState(false);
     const [logoimage, setLogoImage] = React.useState();
     
+    // get the type of the subscription from the url
+    const searchParams = useSearchParams();
+    const modelType = searchParams.get('type')
+
     useEffect(() => {
       if (typeof window != undefined && userDetails?.email) 
         {
@@ -27,6 +36,13 @@ function GenerateLogo() {
 
 
 const GenerateAiLogo = async () => {
+
+  if (modelType!= "Free" && userDetails?.credit <= 0) {
+    // alert("You have no credits left. Please upgrade your plan.");
+    toast.error("You have no credits left. Please upgrade your plan.");
+    return;
+  }
+
   setLoading(true);
   let PROMPT = "";
 
@@ -45,7 +61,9 @@ const GenerateAiLogo = async () => {
         prompt: PROMPT,
         email: userDetails?.email,
         title: formData?.title,
-        desc: formData?.desc
+        desc: formData?.desc,
+        type: modelType,
+        userCredit: userDetails?.credit
       });
 
       console.log("AI logo model result", result?.data);
@@ -70,7 +88,7 @@ const GenerateAiLogo = async () => {
   return (
     <div>
       <h2>{loading && "Loading..."}</h2>
-      {!loading&& <Image src={logoimage} alt="Generated Logo" width={300} height={300} />}
+      {!loading&& <Image src={logoimage} alt="Generated Logo" width={200} height={200} />}
     </div>
   )
 }

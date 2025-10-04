@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 function Header() { 
     const { user } = useUser();
@@ -12,7 +13,7 @@ function Header() {
             <Image src = {"/logo.svg"} alt="Logo" width={180} height={100} />
             <div className="flex gap-4 iterms-center">
                 {
-                user ? <Button >DashBoard</Button>:
+                user ? <Link href="/dashboard"><Button className="cursor-pointer">DashBoard</Button> </Link>:
                 <Button>Get Started</Button>  
                 }
               <UserButton/>

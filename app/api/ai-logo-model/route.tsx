@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 import mime from 'mime';
 import { AiPromptResult } from '@/configs/AiModel';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { title } from 'process';
 import { db } from '@/configs/FirebaseConfig';
 
@@ -12,7 +12,8 @@ const genAI = new GoogleGenAI({
 });
 
 export async function POST(request: Request) {
-  const { prompt, email, title, desc } = await request.json();
+  const { prompt, email, title, desc, type, userCredit } = await request.json();
+  let base64ImageWithMime = "";
 
   try {
     // Step 1: Use Gemini (text model) to refine the prompt if needed
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
       },
     ];
 
+    if (type == "Pro") {
     const imageResponse = await genAI.models.generateContentStream({
       model,
       contents,
@@ -60,7 +62,18 @@ export async function POST(request: Request) {
     }
 
     const mimeType = 'image/png'; // Default, or parse from model if available
-    const base64ImageWithMime = `data:${mimeType};base64,${base64Image}`;
+    base64ImageWithMime = `data:${mimeType};base64,${base64Image}`;
+
+    if (userCredit) {
+      // Deduct user credits or perform any other logic
+      await updateDoc(doc(db, 'users', email), { credit: userCredit - 1 });
+    }
+
+    } else {
+      // use a free model or set base64ImageWithMime to a placeholder
+    }
+
+
 
     // we can save this to Firebase Storage here if needed
     try{

@@ -2,6 +2,7 @@ import { VT323 } from "next/font/google";
 import "./globals.css";
 import Provider from "./provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 // here is the font i want to use in my project
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         className={press_font.className}
       >
         <Provider>{children}</Provider>
+        <Toaster/>
         
       </body>
     </html>
