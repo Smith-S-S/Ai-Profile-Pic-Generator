@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation'
 function CreateLogo() {
 
     const [step, setStep] = useState(1);
-    const [formData, setFormData] = useState()
+    const [formData, setFormData] = useState({})
     const { user } = useUser();
     const router = useRouter();
 
@@ -31,8 +31,11 @@ function CreateLogo() {
     console.log("formData", formData);
 
     const goNext = () => {
-      // If user is signed in and we're at the last step, go generate directly
+      // If user is signed in and we're at the last step, persist data then generate directly
       if (user && step >= 5) {
+        if (typeof window !== 'undefined') {
+          try { localStorage.setItem('formData', JSON.stringify(formData)); } catch (e) {}
+        }
         router.push('/generate-logo?type=Pro');
         return;
       }
