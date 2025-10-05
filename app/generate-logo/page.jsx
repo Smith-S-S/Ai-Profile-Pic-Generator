@@ -1,5 +1,5 @@
 "use client"
-import React, { use, useContext, useEffect } from 'react'
+import React, { use, useContext, useEffect, Suspense } from 'react'
 import Prompt from '../_data/Prompt';
 import { UserDetailContext } from '../_context/UserDetailContext';
 import axios from 'axios';
@@ -185,4 +185,10 @@ const GenerateAiLogo = async () => {
   )
 }
 
-export default GenerateLogo;
+export default function GenerateLogoPageWrapper(){
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <GenerateLogo />
+    </Suspense>
+  );
+}
