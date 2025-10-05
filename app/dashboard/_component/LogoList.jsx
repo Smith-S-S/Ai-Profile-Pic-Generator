@@ -27,8 +27,16 @@ function LogoList() {
 
 
   const ViewLogo = (imageUrl) => {
-    const imageWindow = window.open();
-    imageWindow.document.write(`<img src="${imageUrl}" alt="Logo Image" />`);
+    const imageWindow = window.open('', '_blank');
+    imageWindow.document.write(`
+      <html>
+        <head><title>Logo - Full Size</title></head>
+        <body style="margin:0; padding:20px; background:#f0f0f0; display:flex; justify-content:center; align-items:center; min-height:100vh;">
+          <img src="${imageUrl}" alt="Logo Image" style="max-width:100%; max-height:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.1);" />
+        </body>
+      </html>
+    `);
+    imageWindow.document.close();
   }
 
   return (

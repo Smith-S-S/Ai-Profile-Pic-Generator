@@ -3,34 +3,17 @@ import { GoogleGenAI } from '@google/genai';
 import mime from 'mime';
 import { AiPromptResult } from '@/configs/AiModel';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { title } from 'process';
-import { db, storage } from '@/configs/FirebaseConfig';
+import { db } from '@/configs/FirebaseConfig';
 
 // Use native Buffer if needed (for base64 conversion)
 const genAI = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!,
 });
 
-// Simple image compression function
-async function compressImage(base64Image: string): Promise<string> {
-  try {
-    // Extract base64 data
-    const base64Data = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
-    const buffer = Buffer.from(base64Data, 'base64');
-    
-    // For now, just return the original image with a smaller data URL
-    // In production, you'd use a proper image compression library
-    return `data:image/png;base64,${base64Data.substring(0, Math.floor(base64Data.length * 0.7))}`;
-  } catch (error) {
-    console.error('Compression error:', error);
-    return base64Image;
-  }
-}
-
 export async function POST(request: Request) {
   const { prompt, email, title, desc, type, userCredit } = await request.json();
   let base64ImageWithMime = "";
+  let imageUrl = ""; // Declare imageUrl at function scope
 
   try {
     // Step 1: Use Gemini (text model) to refine the prompt if needed
@@ -81,18 +64,21 @@ export async function POST(request: Request) {
     const mimeType = 'image/png'; // Default, or parse from model if available
     base64ImageWithMime = `data:${mimeType};base64,${base64Image}`;
 
+    // Don't store image in Firestore - it's too large
+    // Just return the full image to the user
+    imageUrl = base64ImageWithMime;
+
     if (userCredit) {
       // Deduct user credits or perform any other logic
       await updateDoc(doc(db, 'users', email), { credits: userCredit - 1 });
     }
 
     } else {
-      // use a free model or set base64ImageWithMime to a placeholder
+      // For free users, also return full image
+      imageUrl = base64ImageWithMime;
     }
 
-
-
-    // Save metadata to Firestore without image data (due to size limits)
+    // Save only metadata to Firestore (no image data)
     try {
       const timestamp = Date.now().toString();
       
@@ -102,7 +88,7 @@ export async function POST(request: Request) {
         timestamp: timestamp,
         platform: type || 'Unknown',
         imageGenerated: true,
-        imageSize: 'Large - displayed in generation page only'
+        imageSize: 'Large - displayed only, not stored'
       });
       
       console.log('Successfully saved metadata to Firestore');
@@ -110,7 +96,7 @@ export async function POST(request: Request) {
       console.error('Error saving to Firestore:', err);
     }
 
-    return NextResponse.json({ image: base64ImageWithMime });
+    return NextResponse.json({ image: imageUrl || base64ImageWithMime });
   } catch (error) {
     console.error('Error in AI logo model:', error);
     return NextResponse.json(

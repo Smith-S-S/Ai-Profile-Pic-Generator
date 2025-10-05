@@ -140,13 +140,24 @@ const GenerateAiLogo = async () => {
                     link.download = `avatar-${formData?.platform || 'profile'}.png`;
                     link.click();
                   }}
-                  className="px-6 py-3 bg-gradient-electric hover:glow-electric-blue text-white rounded-lg font-semibold transition-all duration-200"
+                  className="px-6 py-3 bg-gradient-electric hover:glow-electric-blue text-white rounded-lg font-semibold transition-all duration-200 cursor-pointer"
                 >
                   📥 Download Avatar
                 </button>
                 <button 
-                  onClick={() => window.open(logoimage, '_blank')}
-                  className="px-6 py-3 border border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-white rounded-lg font-semibold transition-all duration-200"
+                  onClick={() => {
+                    const newWindow = window.open('', '_blank');
+                    newWindow.document.write(`
+                      <html>
+                        <head><title>Avatar - Full Size</title></head>
+                        <body style="margin:0; padding:20px; background:#f0f0f0; display:flex; justify-content:center; align-items:center; min-height:100vh;">
+                          <img src="${logoimage}" alt="Generated Avatar" style="max-width:100%; max-height:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.1);" />
+                        </body>
+                      </html>
+                    `);
+                    newWindow.document.close();
+                  }}
+                  className="px-6 py-3 border border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-white rounded-lg font-semibold transition-all duration-200 cursor-pointer"
                 >
                   🔍 View Full Size
                 </button>
