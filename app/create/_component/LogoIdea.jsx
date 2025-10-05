@@ -13,7 +13,7 @@ function LogoIdea({onHandleInputChange, formData}) {
     if (formData?.platform && formData?.keywords && formData?.design) {
       generateLogoIdeas();
     }
-  }, [formData]);
+  }, [formData?.platform, formData?.keywords, formData?.design]);
 
   const generateLogoIdeas = async () => {
     setLoading(true);
