@@ -1,5 +1,5 @@
 import React from 'react'
-import Info from './_component/info'
+import Info from './_component/Info'
 import LogoList from './_component/LogoList'
 
 function DashBoard() {
