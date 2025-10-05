@@ -1,37 +1,35 @@
 export default [
 
-    {
-        title: "Facebook Lamma",
-        image: "/design_1.png",
-        prompt: "Create a fun and quirky logo featuring a cartoon llama with social or friendly vibes. Use bright, engaging colors and a playful style suitable for community-driven platforms or casual apps.",
-      },
-      
-      {
-        title: "Doge",
-        image: "/design_2.png",
-        prompt: "Design a meme-inspired logo featuring a Shiba Inu in a modern, clean style. Use bold typography, vibrant gradients, and a fun, ironic twist suitable for web3, crypto, or internet culture projects.",
-      },
-      
-      {
-        title: "Naruto",
-        image: "/design_3.png",
-        prompt: "Create a dynamic, anime-inspired logo with ninja aesthetics — swirling energy, headband symbols, and bold movement lines. Include modern tech or digital art vibes, ideal for gaming or dev communities.",
-      },
-      
-      {
-        title: "Pepe Frog Meme",
-        image: "/design_4.png",
-        prompt: "Generate a stylized meme-logo based on abstract humor. Use surreal shapes, exaggerated expressions, and vibrant colors. The design should feel edgy, ironic, and internet-native — perfect for underground or niche online projects.",
-      },
-      
-      {
-        title: "Troll Face",
-        image: "/design_5.png",
-        prompt: "Create a bold, mischievous logo with meme culture influence. Use sharp lines, high-contrast colors, and chaotic energy to capture the trolling spirit — ideal for satire, humor, or internet parody brands.",
-      },
-      
-
-
+  {
+    title: "Facebook Llama",
+    image: "/design_1.png",
+    prompt: "Create an avatar based on the character 'Facebook Llama' — a friendly, social llama with a warm, approachable personality. The avatar should have bright, cheerful colors and a cartoon style that conveys community and collaboration. This avatar represents a developer who is friendly, helpful, and active in social or team platforms like GitHub or Slack.",
+  },
+  
+  {
+    title: "Doge",
+    image: "/design_2.png",
+    prompt: "Generate an avatar inspired by the iconic 'Doge' meme featuring a Shiba Inu dog. The avatar should capture Doge's playful, cheeky expression in a clean, modern digital art style with vibrant gradients. This avatar suits developers involved in web3, crypto, or internet culture projects, reflecting fun and tech-savvy personality.",
+  },
+  
+  {
+    title: "Naruto",
+    image: "/design_3.png",
+    prompt: "Design an avatar based on the popular anime character 'Naruto' — a ninja with spiky hair, headband, and dynamic energy. The avatar should combine traditional ninja aesthetics with a futuristic tech vibe, symbolizing a coder with agility, focus, and creativity. Hands, if visible, should be accurately posed as if performing precise, skillful tasks. Ideal for gaming and developer communities on Discord or GitHub.",
+  },
+  
+  {
+    title: "Pepe Frog Meme",
+    image: "/design_4.png",
+    prompt: "Create an avatar inspired by the 'Pepe Frog Meme' — a quirky, internet-famous frog with exaggerated, expressive features. The style should be surreal and edgy with bold colors and playful distortion. This avatar represents an underground or niche developer persona, someone who’s creative, ironic, and deeply connected to meme culture within coding or hacker communities.",
+  },
+  
+  {
+    title: "Troll Face",
+    image: "/design_5.png",
+    prompt: "Generate an avatar based on the 'Troll Face' meme — a mischievous character known for its sly smile and trolling personality. The avatar should capture this playful but clever essence, with bold lines and high contrast. Add a developer twist by portraying the troll as a programming king or mastermind, someone who playfully challenges conventions on platforms like GitHub or Discord.",
+  },
+  
 ]
 
-// here we write the prompt for different logo designs
+// here we write the prompt for different avatar designs

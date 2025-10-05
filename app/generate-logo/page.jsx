@@ -23,11 +23,14 @@ function GenerateLogo() {
     useEffect(() => {
       if (typeof window != undefined && userDetails?.email) 
         {
-
           const storage = localStorage.getItem("formData")
+          console.log("Raw localStorage data:", storage);
           if (storage) {
-            setFormData(JSON.parse(storage));
-            console.log("formData in GenerateLogo page:", storage);
+            const parsedData = JSON.parse(storage);
+            setFormData(parsedData);
+            console.log("Parsed formData in GenerateLogo page:", parsedData);
+          } else {
+            console.log("No formData found in localStorage");
           }
       }
     }, [userDetails]);
@@ -36,6 +39,9 @@ function GenerateLogo() {
 
 
 const GenerateAiLogo = async () => {
+  console.log("GenerateAiLogo called with formData:", formData);
+  console.log("ModelType:", modelType);
+  console.log("UserCredits:", userDetails?.credits);
 
   if (modelType!= "Free" && userDetails?.credits <= 0) {
     // alert("You have no credits left. Please upgrade your plan.");
@@ -46,13 +52,13 @@ const GenerateAiLogo = async () => {
   setLoading(true);
   let PROMPT = "";
 
-  if (formData?.title) {
+  if (formData?.platform) {
     PROMPT = Prompt.LOGO_PROMPT
-      .replace("{style}", formData?.title || "modern")
-      .replace("{company name}", formData?.desc || "Your Company")
-      .replace("{industry/niche}", formData?.pattet || "Your Industry")
-      .replace("{color scheme}", formData?.design?.title || "Your Color Scheme")
-      .replace("{logo type}", formData?.design?.prompt || "Your Logo Type");
+      .replace("{design.title}", formData?.design?.title || "Meme")
+      .replace("{design.prompt}", formData?.design?.prompt || "modern and clean")
+      .replace("{keywords}", formData?.keywords?.join(', ') || "developer")
+      .replace("{platform}", formData?.platform || "GitHub")
+      .replace("{palette}", formData?.pattet || "electric blue");
 
     console.log("formated promprt", PROMPT);
 
@@ -60,8 +66,8 @@ const GenerateAiLogo = async () => {
       const result = await axios.post("/api/ai-logo-model", { 
         prompt: PROMPT,
         email: userDetails?.email,
-        title: formData?.title,
-        desc: formData?.desc,
+        title: formData?.platform,
+        desc: formData?.keywords?.join(', '),
         type: modelType,
         userCredit: userDetails?.credits
       });
@@ -80,15 +86,90 @@ const GenerateAiLogo = async () => {
 
 
     useEffect(() => {
-      if (formData?.title) {
+      console.log("useEffect triggered with formData:", formData);
+      if (formData?.platform && formData?.keywords && formData?.design) {
+        console.log("All required fields present, calling GenerateAiLogo");
         GenerateAiLogo();
+      } else {
+        console.log("Missing required fields:", {
+          platform: formData?.platform,
+          keywords: formData?.keywords,
+          design: formData?.design
+        });
       }
     }, [formData]);
 
   return (
-    <div>
-      <h2>{loading && "Loading..."}</h2>
-      {!loading&& <Image src={logoimage} alt="Generated Logo" width={200} height={200} />}
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-electric-blue mb-4">⚡ AI Avatar Generator</h1>
+          <p className="text-lg text-muted-foreground">Creating your unique digital identity...</p>
+        </div>
+
+        {/* Loading State */}
+        {loading && (
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-electric-blue mb-4"></div>
+            <h2 className="text-2xl font-semibold text-dark-navy mb-2">Generating Your Avatar</h2>
+            <p className="text-muted-foreground">This may take a few moments...</p>
+          </div>
+        )}
+
+        {/* Generated Logo Display */}
+        {!loading && logoimage && (
+          <div className="flex flex-col items-center">
+            <div className="bg-card p-8 rounded-2xl border border-electric-blue/20 shadow-lg glow-subtle mb-6">
+              <Image 
+                src={logoimage} 
+                alt="Generated Avatar" 
+                width={400} 
+                height={400} 
+                className="rounded-xl"
+              />
+            </div>
+            
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-dark-navy mb-4">Your Avatar is Ready! 🎉</h3>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <button 
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = logoimage;
+                    link.download = `avatar-${formData?.platform || 'profile'}.png`;
+                    link.click();
+                  }}
+                  className="px-6 py-3 bg-gradient-electric hover:glow-electric-blue text-white rounded-lg font-semibold transition-all duration-200"
+                >
+                  📥 Download Avatar
+                </button>
+                <button 
+                  onClick={() => window.open(logoimage, '_blank')}
+                  className="px-6 py-3 border border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-white rounded-lg font-semibold transition-all duration-200"
+                >
+                  🔍 View Full Size
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* No Data State */}
+        {!loading && !logoimage && (
+          <div className="text-center py-20">
+            <div className="text-6xl mb-4">🎨</div>
+            <h2 className="text-2xl font-bold text-dark-navy mb-4">No Avatar Generated Yet</h2>
+            <p className="text-muted-foreground mb-6">Complete the form steps to generate your AI avatar.</p>
+            <a 
+              href="/create"
+              className="px-6 py-3 bg-gradient-electric hover:glow-electric-blue text-white rounded-lg font-semibold transition-all duration-200"
+            >
+              ← Back to Create
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

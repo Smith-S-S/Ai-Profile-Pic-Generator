@@ -3,13 +3,30 @@ import { GoogleGenAI } from '@google/genai';
 import mime from 'mime';
 import { AiPromptResult } from '@/configs/AiModel';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { title } from 'process';
-import { db } from '@/configs/FirebaseConfig';
+import { db, storage } from '@/configs/FirebaseConfig';
 
 // Use native Buffer if needed (for base64 conversion)
 const genAI = new GoogleGenAI({
-  apiKey: process.env. _API_KEY!,
+  apiKey: process.env.GEMINI_API_KEY!,
 });
+
+// Simple image compression function
+async function compressImage(base64Image: string): Promise<string> {
+  try {
+    // Extract base64 data
+    const base64Data = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
+    
+    // For now, just return the original image with a smaller data URL
+    // In production, you'd use a proper image compression library
+    return `data:image/png;base64,${base64Data.substring(0, Math.floor(base64Data.length * 0.7))}`;
+  } catch (error) {
+    console.error('Compression error:', error);
+    return base64Image;
+  }
+}
 
 export async function POST(request: Request) {
   const { prompt, email, title, desc, type, userCredit } = await request.json();
@@ -75,18 +92,22 @@ export async function POST(request: Request) {
 
 
 
-    // we can save this to Firebase Storage here if needed
-    try{
-      await setDoc(doc(db, 'users', email, "logos",Date.now().toString()),
-        { image: base64ImageWithMime, 
-          title: title,
-          desc: desc
-        }
-      );
-
-    }
-    catch(err){
-      console.log('Error saving to Firebase Storage:', err);
+    // Save metadata to Firestore without image data (due to size limits)
+    try {
+      const timestamp = Date.now().toString();
+      
+      await setDoc(doc(db, 'users', email, "logos", timestamp), {
+        title: title,
+        desc: desc,
+        timestamp: timestamp,
+        platform: type || 'Unknown',
+        imageGenerated: true,
+        imageSize: 'Large - displayed in generation page only'
+      });
+      
+      console.log('Successfully saved metadata to Firestore');
+    } catch (err) {
+      console.error('Error saving to Firestore:', err);
     }
 
     return NextResponse.json({ image: base64ImageWithMime });

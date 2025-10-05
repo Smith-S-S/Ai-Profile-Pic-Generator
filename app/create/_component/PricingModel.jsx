@@ -13,7 +13,7 @@ function PricingModel({formData}) {
   const {user} = useUser();
 
   useEffect(() => {
-    if (formData?. title&& typeof window !== 'undefined') 
+    if (formData?.platform && typeof window !== 'undefined') 
       {
         localStorage.setItem("formData", JSON.stringify(formData));
       }
