@@ -19,14 +19,17 @@ function PricingModel({formData}) {
       }
   }, [formData]);
 
+  // Show pricing only for unsigned users
+  if (user) return null;
+
   return (
     <div className='my-10'>
         <HeadingDescription
         title={Lookup.LogoPricingModelTittle}
         description={Lookup.LogoPricingModelDesc}/>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-5'>
-            {Lookup.pricingOpttions.map((pricing,index)=>(
+        <div className='grid grid-cols-1 gap-5 mt-5'>
+            {Lookup.pricingOpttions.filter(p=>p.tittle==="Pro").map((pricing,index)=>(
                 <div key={index}
                 className='p-5 hover:border-2 rounded-xl  flex flex-col items-center justify-center text-center border'>
                     <Image src={pricing.icon} alt ={pricing.tittle} width={60} height={60}></Image>
@@ -38,15 +41,9 @@ function PricingModel({formData}) {
                         ))}                      
                     </div>
 
-                    {
-                    user ? 
-                    <Link href={"/generate-logo?type="+pricing.tittle}>
-                  <Button className="mt-5 cursor-pointer">{pricing.button}</Button> 
-                  </Link>
-                  : <SignInButton mode="modal" forceRedirectUrl={"/generate-logo?type="+pricing.tittle}> 
-                    <Button className="mt-5">{pricing.button}</Button> 
+                    <SignInButton mode="modal" forceRedirectUrl={"/generate-logo?type="+pricing.tittle}> 
+                      <Button className="mt-5 cursor-pointer">{pricing.button}</Button> 
                     </SignInButton>
-                    }     
 
                 </div>
 

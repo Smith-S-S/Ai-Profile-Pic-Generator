@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
 import LogoTitle from './_component/LogoTitle'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
@@ -9,12 +9,18 @@ import LogoColorPalete from './_component/LogoColorPalete'
 import LogoDesigns from './_component/LogoDesigns'
 import LogoIdea from './_component/LogoIdea'
 import PricingModel from './_component/PricingModel'
+import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 
 
 function CreateLogo() {
 
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState()
+    const { user } = useUser();
+    const router = useRouter();
+
+    const totalSteps = user ? 5 : 6;
     const onHandleInputChange = (field, value) => {
 
         setFormData(prev=> ({
@@ -24,18 +30,27 @@ function CreateLogo() {
     }
     console.log("formData", formData);
 
+    const goNext = () => {
+      // If user is signed in and we're at the last step, go generate directly
+      if (user && step >= 5) {
+        router.push('/generate-logo?type=Pro');
+        return;
+      }
+      setStep(step+1);
+    }
+
   return (
     <div className='mt-28 p-10 border border-electric-blue/30 rounded-xl 2xl:mx-72 bg-card shadow-lg'>
       {/* Progress Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold text-electric-blue">Create Your Logo</h2>
-          <span className="text-sm text-muted-foreground">Step {step} of 6</span>
+          <span className="text-sm text-muted-foreground">Step {step} of {totalSteps}</span>
         </div>
         <div className="w-full bg-muted rounded-full h-2">
           <div 
             className="bg-gradient-electric h-2 rounded-full transition-all duration-300" 
-            style={{ width: `${(step / 6) * 100}%` }}
+            style={{ width: `${(step / totalSteps) * 100}%` }}
           ></div>
         </div>
       </div>
@@ -68,7 +83,7 @@ function CreateLogo() {
 
             <Button 
             className="bg-gradient-electric hover:glow-electric-blue text-white font-semibold cursor-pointer"
-            onClick ={()=>setStep(step+1)}> 
+            onClick ={goNext}> 
             <ArrowRight/> Continue 
             </Button>
 
